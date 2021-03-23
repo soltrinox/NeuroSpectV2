@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "strict": false,
+    "lib": ["es2015"],
+    "declarationDir": "./types",
+    "rootDir": "./src",
+    "outDir": "./dist/es",
+    "baseUrl": "."
+  },
+  "extends": "../../tsconfig.es.json",
+  "include": ["src/"]
+}

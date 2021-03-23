@@ -1,0 +1,16 @@
+{
+  "name": "BrainApp",
+  "version": "1.0.0",
+  "description": "Clone the entire repository to test the game on your Unity Engine. All my work is in the Assets folder.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "aws-sdk": "^2.858.0"
+  },
+  "devDependencies": {}
+}

@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "lib": ["es5", "es2015.promise", "es2015.collection", "DOM"],
+    "stripInternal": true,
+    "declarationDir": "./types",
+    "rootDir": "./src",
+    "outDir": "./dist/es",
+    "baseUrl": ".",
+    "target": "ES2015",
+    "module": "esNext",
+    "moduleResolution": "node",
+    "incremental": true
+  },
+  "extends": "../../tsconfig.es.json",
+  "include": ["src/"]
+}
