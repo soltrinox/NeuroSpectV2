@@ -255,8 +255,8 @@ public class RecallGame : MonoBehaviour
                 bool correct = clickedImg.ToString().Equals(correctImg.ToString());
 
                 recall_data.Add(iteration + "," + categorizationCorrect[0] + "," + categorizationCorrect[1] + "," + categorizationCorrect[2]
-                                + "," + categorizationCorrect[3] + "," + categorizationClicked[0] + "," + categorizationClicked[1] + "," +
-                                "," + categorizationClicked[2] + "," + categorizationClicked[3] + "," + correct.ToString() + "," + timeLeft.ToString() + "\n");
+                                + "," + categorizationCorrect[3] + "," + categorizationClicked[0] + "," + categorizationClicked[1] + "," 
+                                + categorizationClicked[2] + "," + categorizationClicked[3] + "," + correct.ToString() + "," + timeLeft.ToString() + "\n");
 
                 timeLeft = 4f;
 

@@ -1,5 +1,5 @@
 mergeInto(LibraryManager.library, {
-    CheckCode: function (tableName, code) {
+    /*CheckCode: function (tableName, code) {
         var params = {
             TableName: Pointer_stringify(tableName),
             Key: {
@@ -20,20 +20,20 @@ mergeInto(LibraryManager.library, {
         var returnStr = "Error";
         docClient.get(params, function (err, data) {
             if (err) {
+                returnStr = "Error";
                 SendMessage('Main Camera', 'StringCallbackCode',
-                    "false");
+                    returnStr);
             }
             else {
+                returnStr = "Data Found:" + JSON.stringify(data,
+                    undefined, 2);
                 SendMessage('Main Camera', 'StringCallbackCode',
-                    "true");
+                    returnStr);
             }
+
         });
-    },
-    InsertData: function (tableName, code, age, race, gender, attentionData, recallData) {
-        var attentionRows = [];
-        attentionRows = attentionData.toString().split('\n');
-        var recallRows = [];
-        recallRows = recallData.toString().split('\n');
+    },*/
+    InsertData: function (tableName, code, age, race, gender, attentionData, recallData, attentionScore, recallScore) {
 
         var params =
         {
@@ -44,8 +44,10 @@ mergeInto(LibraryManager.library, {
                 "age": Pointer_stringify(age),
                 "race": Pointer_stringify(race),
                 "gender": Pointer_stringify(gender),
-                "attentionData": Pointer_stringify(attentionRows),
-                "recallData": Pointer_stringify(recallRows)
+                "attentionData": Pointer_stringify(attentionData),
+                "recallData": Pointer_stringify(recallData),
+                "attentionScore": attentionScore,
+                "recallScore": recallScore
             }
         }
 

@@ -8,7 +8,6 @@ public class ShapeSpawner : MonoBehaviour
 {
     private float nextUpdate = 0;
     private bool beginSpawn = false;
-    public Image img;
     private float timeOfAppearance = 3f;
     private float timeShown = 3f;
     private float factorOfDecrease;
@@ -51,7 +50,7 @@ public class ShapeSpawner : MonoBehaviour
 
     public IEnumerator WaitForSpawn()
     {
-        yield return new WaitUntil(() => img.color.a == 0);
+        yield return new WaitForSeconds(5f);
         beginSpawn = true;
     }
 

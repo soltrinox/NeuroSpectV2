@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Runtime.InteropServices;
+using UnityEngine.Networking;
 
 public class DisplayScore : MonoBehaviour
 {
@@ -12,18 +13,18 @@ public class DisplayScore : MonoBehaviour
 
     public Text code;
 
-    private string info;
-
-    [DllImport("__Internal")]
-    private static extern void CheckCode(string tableName, string code);
     [DllImport("__Internal")]
     private static extern void InsertData(string tableName, string code, 
-        string age, string race, string gender, string attentionData, string recallData);
+        string age, string race, string gender, string attentionData, string recallData, int attentionScore, int recallScore);
+    [DllImport("__Internal")]
+    private static extern string GetToken();
 
-    public void StringCallbackCode(string info)
-    {
-        this.info = info;
-    }
+    [DllImport("__Internal")]
+    private static extern string GetBaseAPIURL();
+
+    [DllImport("__Internal")]
+    private static extern void NextScreen();
+
 
     public void StringCallback(string info)
     {
@@ -43,9 +44,7 @@ public class DisplayScore : MonoBehaviour
         }
 
         System.Random generator = new System.Random();
-        //string codeStr = generator.Next(100000, 1000000).ToString("D6");
-
-        string codeStr = "555555";
+        string codeStr = generator.Next(100000, 1000000).ToString("D6");
 
         int recallScore = recallScoreTotal[0];
 
@@ -62,7 +61,9 @@ public class DisplayScore : MonoBehaviour
         string attention = "";
         string recall = "";
 
-        foreach(string a in attentionData)
+        code.text += " " + codeStr;
+
+        foreach (string a in attentionData)
         {
             attention += (a + "\n");
         }
@@ -71,17 +72,30 @@ public class DisplayScore : MonoBehaviour
             recall += (r + "\n");
         }
 
-        if (Application.platform == RuntimePlatform.WebGLPlayer) {
-            CheckCode("userdata", codeStr);
-            while (info.Equals("true"))
-            {
-                Debug.Log(codeStr + ", " + info);
-                codeStr = generator.Next(100000, 1000000).ToString("D6");
-                CheckCode("userdata", codeStr);
-            }
-            InsertData("userdata", codeStr, age, race, gender, attention, recall);
+        /*if (Application.platform == RuntimePlatform.WebGLPlayer) {
+            InsertData("userdata", codeStr, age, race, gender, attention, recall, attentionScore, recallScore);
+        }*/
+
+        WWWForm form = new WWWForm();
+        form.AddField("recallScore", recallScore);
+        form.AddField("attentionScore", attentionScore);
+
+        string path = GetBaseAPIURL() + "/api/assessments/neurospect";
+
+        UnityWebRequest www = UnityWebRequest.Post(path, form);
+        www.SetRequestHeader("Authorization", "TOKEN " + GetBaseAPIURL());
+
+        www.SendWebRequest();
+
+        if (www.result != UnityWebRequest.Result.Success)
+        {
+            Debug.Log(www.error);
+        }
+        else
+        {
+            Debug.Log("Success");
         }
 
-
+        NextScreen();
     }
 }

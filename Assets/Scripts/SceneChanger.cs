@@ -8,7 +8,11 @@ public class SceneChanger : MonoBehaviour
 {
     
     public Animator anim;
-    public Image img;
+
+    void Start()
+    {
+        anim.SetBool("fade", false);
+    }
 
     void Update()
     {
@@ -20,8 +24,8 @@ public class SceneChanger : MonoBehaviour
 
     IEnumerator Fading()
     {
-        anim.SetBool("Fade", true);
-        yield return new WaitUntil(() => img.color.a == 1);
+        anim.SetBool("fade", true);
+        yield return new WaitUntil(() => GetComponent<SpriteRenderer>().color.a == 1);
         SceneManager.LoadScene(1);
     }
 }
