@@ -13,10 +13,10 @@ public class DisplayScore : MonoBehaviour
 
     public Text code;
 
-    [DllImport("__Internal")]
+    /*[DllImport("__Internal")]
     private static extern void InsertData(string tableName, string code, 
         string age, string race, string gender, string attentionData, string recallData, int attentionScore, int recallScore);
-    [DllImport("__Internal")]
+    [DllImport("__Internal")]*/
     private static extern string GetToken();
 
     [DllImport("__Internal")]
